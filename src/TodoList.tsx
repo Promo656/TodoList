@@ -1,15 +1,20 @@
 import React from "react";
+import {TaskPropsType} from "./App"
 
-export function TodoList() {
+type TodoListPropsType={
+    title:string
+    tasks: Array<TaskPropsType>
+}
+export function TodoList(props:TodoListPropsType) {
     return (
         <div>
-            <h3>What to learn</h3>
+            <h3>{props.title}</h3>
             <div>
                 <input/>
                 <button>+</button>
             </div>
             <ul>
-                <li><input type="checkbox" checked={true}/> <span>HTML&CSS</span></li>
+                <li><input type="checkbox" checked={props.tasks[2].isDone}/> <span>{props.tasks[0].title}</span></li>
                 <li><input type="checkbox" checked={true}/> <span>JS</span></li>
                 <li><input type="checkbox" checked={false}/> <span>React</span></li>
             </ul>

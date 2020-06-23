@@ -7,11 +7,13 @@ function App() {
         {id:1,title:'HTML',isDone:true},
         {id:2,title:'CSS',isDone:false},
         {id:3,title:'JS',isDone:true},
+        {id:4,title:'TSX',isDone:true}
     ]
     const tasks2=[
         {id:1, title:'Beer',isDone:false},
         {id:2, title:'Cheeps',isDone:true},
-        {id:3, title:'Pizza',isDone:false}
+        {id:3, title:'Pizza',isDone:false},
+        {id:4, title:'Cola',isDone:true}
     ]
     return (
         <div className="App">

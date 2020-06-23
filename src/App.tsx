@@ -2,55 +2,23 @@ import React from 'react';
 import './App.css';
 import {TodoList} from "./TodoList";
 
-export type TaskPropsType = {
-    id: number,
-    title: string,
-    isDone: boolean
-}
-
 function App() {
-    const task1: Array<TaskPropsType> = [
-        {
-            id: 1,
-            title: "HTML",
-            isDone: false
-        },
-        {
-            id: 2,
-            title: "JS",
-            isDone: false
-        },
-        {
-            id: 3,
-            title: "CSS",
-            isDone: false
-        }
-    ];
-    const task2: Array<TaskPropsType> = [
-        {
-            id: 4,
-            title: "Bear",
-            isDone: false
-        },
-        {
-            id: 5,
-            title: "Fish",
-            isDone: false
-        },
-        {
-            id: 6,
-            title: "Cheeps",
-            isDone: false
-        }
-    ];
+    const tasks1=[
+        {id:1,title:'HTML',isDone:true},
+        {id:2,title:'CSS',isDone:false},
+        {id:3,title:'JS',isDone:true},
+    ]
+    const tasks2=[
+        {id:1, title:'Beer',isDone:false},
+        {id:2, title:'Cheeps',isDone:true},
+        {id:3, title:'Pizza',isDone:false}
+    ]
     return (
         <div className="App">
-            <TodoList title={"What to learn"} tasks={task1}/>
-            <TodoList title={"What to buy"} tasks={task2}/>
+            <TodoList title='What to learn?' tasks={tasks1}/>
+            <TodoList title='What to buy?' tasks={tasks2}/>
         </div>
     );
 }
-
 export default App;
-
 

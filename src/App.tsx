@@ -5,8 +5,8 @@ import {TodoList} from "./TodoList";
 export type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask:(taskId:number)=> void
-    changeFilter: (newFilterValue:FilterValuesType)=>void
+    removeTask: (taskId: number) => void
+    changeFilter: (newFilterValue: FilterValuesType) => void
 }
 export type TaskType = {
     id: number
@@ -16,7 +16,7 @@ export type TaskType = {
 export type FilterValuesType = "all" | "active" | "complited"
 
 export function App() {
-    let [tasks, setTasks] = useState([
+    let [tasks, setTasks] = useState<Array<TaskType>>([
         {id: 1, title: 'HTML', isDone: false},
         {id: 2, title: 'CSS', isDone: false},
         {id: 3, title: 'JS', isDone: true},
@@ -26,7 +26,7 @@ export function App() {
         {id: 7, title: 'LEss', isDone: true}
     ])
 
-    let [filter, setFilter] = useState<FilterValuesType>("complited")
+    let [filter, setFilter] = useState<FilterValuesType>("all")
 
     function removeTask(taskId: number) {
         let filteredTasks = tasks.filter((t: TaskType) => t.id !== taskId)
@@ -54,7 +54,7 @@ export function App() {
                 changeFilter={changeFilter}
             />
         </div>
-    );
+    )
 }
 
 

@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
 import './App.css';
 import {TodoList} from "./TodoList";
+import {v1} from "uuid";
 
 export type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskId: number) => void
+    addTasks:(newTaskName:string)=>void
+    removeTask: (taskId: string) => void
     changeFilter: (newFilterValue: FilterValuesType) => void
 }
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
@@ -17,18 +19,24 @@ export type FilterValuesType = "all" | "active" | "complited"
 
 export function App() {
     let [tasks, setTasks] = useState<Array<TaskType>>([
-        {id: 1, title: 'HTML', isDone: false},
-        {id: 2, title: 'CSS', isDone: false},
-        {id: 3, title: 'JS', isDone: true},
-        {id: 4, title: 'TSX', isDone: true},
-        {id: 5, title: 'React', isDone: true},
-        {id: 6, title: 'Sass', isDone: false},
-        {id: 7, title: 'LEss', isDone: true}
+        {id: v1(), title: 'HTML', isDone: false},
+        {id: v1(), title: 'CSS', isDone: false},
+        {id: v1(), title: 'JS', isDone: true},
+        {id: v1(), title: 'TSX', isDone: true},
+        {id: v1(), title: 'React', isDone: true},
+        {id: v1(), title: 'Sass', isDone: false},
+        {id: v1(), title: 'LEss', isDone: true}
     ])
 
     let [filter, setFilter] = useState<FilterValuesType>("all")
 
-    function removeTask(taskId: number) {
+    function addTask(newTaskName:string) {
+        let newTask={id: v1(), title: newTaskName, isDone: true}
+        let newTasks=[newTask, ...tasks]
+        setTasks(newTasks)
+    }
+
+    function removeTask(taskId: string) {
         let filteredTasks = tasks.filter((t: TaskType) => t.id !== taskId)
         setTasks(filteredTasks)
     }
@@ -50,6 +58,7 @@ export function App() {
             <TodoList
                 title='What to learn?'
                 tasks={taskForTodoList}
+                addTasks={addTask}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
             />

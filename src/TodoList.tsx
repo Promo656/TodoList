@@ -50,6 +50,7 @@ export function TodoList(props: TodoListPropsType) {
                     className={error ? "error" : ""}
                 />
                 <button onClick={addTask}>+</button>
+                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {props.tasks.map((t) => {
@@ -70,7 +71,7 @@ export function TodoList(props: TodoListPropsType) {
                             />
                             <span>{t.title}</span>
                             <button onClick={removeTask}>x</button>
-                            {error && <div className="error-message">{error}</div>}
+
                         </li>
                     )
                 })}

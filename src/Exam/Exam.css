@@ -1,0 +1,42 @@
+/*.stop {
+    background-color: red;
+}*/
+.mainContainer {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 300px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.counter {
+    font-size: 50pt;
+    text-align: center;
+}
+.red{
+    font-size: 50pt;
+    text-align: center;
+    color: red;
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inc {
+    border-radius: 10px;
+    margin: 10px;
+    flex-grow: 1;
+    height: 140px;
+}
+
+.reset {
+    border-radius: 10px;
+    margin: 10px;
+    flex-grow: 1;
+    height: 140px;
+}

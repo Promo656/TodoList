@@ -1,36 +1,44 @@
 import React, {useState} from "react";
-import {v1} from "uuid";
+import {FilterValueTYpe, TaskType} from "./TestApp";
 
-type TasksType = Array<TaskType>
-type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
+type PropsType = {
+    tasks: Array<TaskType>
+    removeTasks: (taskId: string) => void
+    changeFilter: (value: FilterValueTYpe) => void
+    addTask: (title: string) => void
 }
 
-export function ListOfTasks() {
-    let [tasks, setTasks] = useState<TasksType>([
-            {id: v1(), title: "Wake up", isDone: true},
-            {id: v1(), title: "Do it", isDone: false},
-            {id: v1(), title: "Win", isDone: true}
-        ]
-    )
+export function ListOfTasks(props: PropsType) {
+    let [title, setTitle] = useState("")
+
+    function addTasks() {
+        props.addTask(title)
+        setTitle("")
+    }
 
     return (
         <div>
             <h1> Main tasks</h1>
-            <input type="text"/>
-            <button>X</button>
+            <input
+                type="text"
+                onChange={(event => {
+                    setTitle(event.currentTarget.value)
+                })}/>
+            <button onClick={addTasks}>Add</button>
             <ul>
-                {tasks.map((t) => {
+                {props.tasks.map((t) => {
                     return (
                         <li key={t.id}>
                             <input type="checkbox" checked={t.isDone}/>
                             <span>{t.title}</span>
+                            <button onClick={() => props.removeTasks(t.id)}>X</button>
                         </li>
                     )
                 })}
             </ul>
+            <button onClick={() => props.changeFilter("all")}>All</button>
+            <button onClick={() => props.changeFilter("active")}>Active</button>
+            <button onClick={() => props.changeFilter("complited")}>Complited</button>
         </div>
     )
 }

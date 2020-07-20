@@ -8,15 +8,15 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
-export type FilterValueTYpe="all" | "active" | "complited"
+export type FilterValueTYpe = "all" | "active" | "complited"
 
 export function TestApp() {
 
     let [tasks, setTasks] = useState<TasksType>([
-            {id: v1(), title: "Wake up", isDone: true},
-            {id: v1(), title: "Do it", isDone: false},
-            {id: v1(), title: "Win", isDone: true}
-        ])
+        {id: v1(), title: "Wake up", isDone: true},
+        {id: v1(), title: "Do it", isDone: false},
+        {id: v1(), title: "Win", isDone: true}
+    ])
 
     let [filter, setFilter] = useState<FilterValueTYpe>("all")
 
@@ -29,9 +29,9 @@ export function TestApp() {
         setFilter(value)
     }
 
-    function addTask(title:string){
-        let task={id: v1(), title: title, isDone: false}
-        let newTasks=[task,...tasks]
+    function addTask(title: string) {
+        let task = {id: v1(), title: title, isDone: false}
+        let newTasks = [task, ...tasks]
         setTasks(newTasks)
 
     }
@@ -44,6 +44,13 @@ export function TestApp() {
         filteredTasks = tasks.filter((f) => f.isDone === true)
     }
 
+    function changeIsDoneStatus(id: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === id)
+        if (task) {
+            task.isDone = isDone
+            setTasks([...tasks])
+        }
+    }
 
     return (
         <div>
@@ -52,6 +59,7 @@ export function TestApp() {
                 removeTasks={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeIsDoneStatus={changeIsDoneStatus}
             />
         </div>
     )

@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValueTYpe, TaskType} from "./TestApp";
+import "./App.css"
 
 type PropsType = {
     tasks: Array<TaskType>
@@ -7,20 +8,27 @@ type PropsType = {
     changeFilter: (value: FilterValueTYpe) => void
     addTask: (title: string) => void
     changeIsDoneStatus: (id: string, isDone: boolean) => void
+    filter:FilterValueTYpe
 }
 
 export function ListOfTasks(props: PropsType) {
     let [title, setTitle] = useState("")
+    let [error, setError] = useState<null|string>(null)
 
     let addTasks = () => {
-        props.addTask(title)
-        setTitle("")
+        if(title.trim()!==""){
+            props.addTask(title)
+            setTitle("")
+        } else {
+        setError("Title is required")
+        }
     }
 
     let takeValue = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
     let useEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.charCode === 13) {
             addTasks()
         }
@@ -43,8 +51,11 @@ export function ListOfTasks(props: PropsType) {
                 type="text"
                 onChange={takeValue}
                 value={title}
-                onKeyPress={useEnter}/>
+                onKeyPress={useEnter}
+
+            />
             <button onClick={addTasks}>Add</button>
+            {error && <div className="error-message">{error}</div>}
             <ul>
                 {props.tasks.map((t) => {
                     let removeTask = () => props.removeTasks(t.id)
@@ -60,6 +71,7 @@ export function ListOfTasks(props: PropsType) {
                                 type="checkbox"
                                 checked={t.isDone}
                                 onChange={changeTaskStatus}
+                                className={t.isDone===true?"is-done":""}
                             />
                             <span>{t.title}</span>
                             <button onClick={removeTask}>X</button>
@@ -67,9 +79,9 @@ export function ListOfTasks(props: PropsType) {
                     )
                 })}
             </ul>
-            <button onClick={changeFiltertoAll}>All</button>
-            <button onClick={changeFiltertoActive}>Active</button>
-            <button onClick={changeFiltertoComplited}>Complited</button>
+            <button className={props.filter==="all"?"active":""} onClick={changeFiltertoAll}>All</button>
+            <button className={props.filter==="active"?"active":""} onClick={changeFiltertoActive}>Active</button>
+            <button className={props.filter==="complited"?"active":""} onClick={changeFiltertoComplited}>Complited</button>
         </div>
     )
 }

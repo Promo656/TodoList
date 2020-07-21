@@ -60,6 +60,7 @@ export function TestApp() {
                 changeFilter={changeFilter}
                 addTask={addTask}
                 changeIsDoneStatus={changeIsDoneStatus}
+                filter={filter}
             />
         </div>
     )

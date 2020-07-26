@@ -8,12 +8,11 @@ export function TodoList(props: TodoListPropsType) {
 
     function addTask() {
         if (taskName.trim()) {
-            props.addTasks(taskName.trim())
+            props.addTasks(taskName.trim(), props.id)
             setTaskName("")
         } else {
             setError("Title is required")
         }
-
     }
 
     function onTaskNameChange(e: ChangeEvent<HTMLInputElement>) {
@@ -28,20 +27,25 @@ export function TodoList(props: TodoListPropsType) {
     }
 
     function onAllClickHandler() {
-        props.changeFilter("all")
+        props.changeFilter("all", props.id)
     }
 
     function onActiveClickHandler() {
-        props.changeFilter("active")
+        props.changeFilter("active", props.id)
     }
 
     function onComplitedClickHandler() {
-        props.changeFilter("complited")
+        props.changeFilter("complited", props.id)
+    }
+
+    function onClickRemoveTodoList() {
+        props.removeTodoList(props.id)
     }
 
     return (
         <div>
             <h3>{props.title}</h3>
+            <button onClick={onClickRemoveTodoList}>X</button>
             <div>
                 <input
                     value={taskName}
@@ -55,11 +59,11 @@ export function TodoList(props: TodoListPropsType) {
             <ul>
                 {props.tasks.map((t) => {
                     let removeTask = () => {
-                        props.removeTask(t.id)
+                        props.removeTask(t.id, props.id)
                     }
                     let changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
                         let newCheckBoxValue = e.currentTarget.checked
-                        props.changeStatus(t.id, newCheckBoxValue)
+                        props.changeStatus(t.id, newCheckBoxValue, props.id)
                     }
                     return (
                         <li key={t.id}
@@ -71,7 +75,6 @@ export function TodoList(props: TodoListPropsType) {
                             />
                             <span>{t.title}</span>
                             <button onClick={removeTask}>x</button>
-
                         </li>
                     )
                 })}

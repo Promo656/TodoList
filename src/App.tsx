@@ -48,7 +48,7 @@ export function App() {
                 {id: v1(), title: 'CSS', isDone: true},
                 {id: v1(), title: 'JS', isDone: true}
             ],
-            [todoListId1]: [
+            [todoListId2]: [
                 {id: v1(), title: 'TSX', isDone: true},
                 {id: v1(), title: 'React', isDone: true},
                 {id: v1(), title: 'Sass', isDone: false},
@@ -73,10 +73,12 @@ export function App() {
     }
 
     function changeFilter(newFilterValue: FilterValuesType, todoListId: string) {
+        debugger
         let todoList = todoLists.find(tl => tl.id === todoListId)
         if (todoList) {
             todoList.filter = newFilterValue
             setTodoList([...todoLists])
+
         }
     }
 
@@ -99,13 +101,15 @@ export function App() {
         <div className="App">
             {
                 todoLists.map(tl => {
-
                     let taskForTodoList = tasks[tl.id]
+
                     if (tl.filter === "active") {
+
                         taskForTodoList = tasks[tl.id].filter(t => t.isDone === false)
                     }
 
                     if (tl.filter === "complited") {
+
                         taskForTodoList = tasks[tl.id].filter(t => t.isDone === true)
                     }
 
@@ -113,7 +117,7 @@ export function App() {
                         <TodoList
                             key={tl.id}
                             id={tl.id}
-                            filter={filter}
+                            filter={tl.filter}
                             title={tl.title}
                             tasks={taskForTodoList}
                             addTasks={addTask}

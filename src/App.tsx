@@ -3,16 +3,15 @@ import './App.css';
 import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 
-
 export type TodoListPropsType = {
     id: string
-    filter: FilterValuesType
     title: string
     tasks: Array<TaskType>
     addTasks: (newTaskName: string, todoListId: string) => void
     removeTask: (taskId: string, todoListId: string) => void
     changeFilter: (newFilterValue: FilterValuesType, todoListId: string) => void
     changeStatus: (id: string, isDone: boolean, todoListId: string) => void
+    filter: FilterValuesType
     removeTodoList: (todoListId: string)=>void
 }
 export type TaskType = {
@@ -21,13 +20,11 @@ export type TaskType = {
     isDone: boolean
 }
 export type FilterValuesType = "all" | "active" | "complited"
-
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
 }
-
 type TaskStateType = {
     [key: string]: Array<TaskType>
 }
@@ -57,8 +54,6 @@ export function App() {
         }
     )
 
-    let [filter, setFilter] = useState<FilterValuesType>("all")
-
     function addTask(newTaskName: string, todoListId: string) {
         let newTask = {id: v1(), title: newTaskName, isDone: true}
         let todoListTasks = tasks[todoListId]
@@ -73,12 +68,10 @@ export function App() {
     }
 
     function changeFilter(newFilterValue: FilterValuesType, todoListId: string) {
-        debugger
         let todoList = todoLists.find(tl => tl.id === todoListId)
         if (todoList) {
             todoList.filter = newFilterValue
             setTodoList([...todoLists])
-
         }
     }
 
@@ -102,14 +95,10 @@ export function App() {
             {
                 todoLists.map(tl => {
                     let taskForTodoList = tasks[tl.id]
-
                     if (tl.filter === "active") {
-
                         taskForTodoList = tasks[tl.id].filter(t => t.isDone === false)
                     }
-
                     if (tl.filter === "complited") {
-
                         taskForTodoList = tasks[tl.id].filter(t => t.isDone === true)
                     }
 

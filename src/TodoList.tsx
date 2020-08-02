@@ -27,28 +27,28 @@ export function TodoList(props: TodoListPropsType) {
     }
 
     function onAllClickHandler() {
-
         props.changeFilter("all", props.id)
     }
 
     function onActiveClickHandler() {
-
         props.changeFilter("active", props.id)
     }
 
     function onComplitedClickHandler() {
-
         props.changeFilter("complited", props.id)
     }
 
     function onClickRemoveTodoList() {
         props.removeTodoList(props.id)
     }
-debugger
+
     return (
         <div>
-            <h3>{props.title}</h3>
-            <button onClick={onClickRemoveTodoList}>X</button>
+            <h3>
+                {props.title}
+                <button onClick={onClickRemoveTodoList}>X</button>
+            </h3>
+
             <div>
                 <input
                     value={taskName}

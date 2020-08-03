@@ -14,6 +14,8 @@ export type TodoListPropsType = {
     changeStatus: (id: string, newValue: boolean, todoListId: string) => void
     filter: FilterValuesType
     removeTodoList: (todoListId: string) => void
+    changeTaskTitle:(newTitle:string, id:string,todolistId:string)=>void
+    changeTodolistTitle:(id:string, newTitle:string)=>void
 }
 export type TaskType = {
     id: string
@@ -85,10 +87,27 @@ export function App() {
         }
     }
 
+    function changeTaskTitle(id: string, newTitle:string, todoListId: string) {
+        let todoListTasks = tasks[todoListId]
+        let task = todoListTasks.find(t => t.id === id)
+        if (task) {
+            task.title=newTitle
+            setTasks({...tasks})
+        }
+    }
+
     function removeTodoList(todoListId: string) {
         setTodoList(
             todoLists.filter(tl => tl.id !== todoListId)
         )
+    }
+
+    function changeTodolistTitle(id:string, newTitle:string){
+     const todolist=todoLists.find(tl=>tl.id===id)
+        if(todolist){
+            todolist.title=newTitle
+            setTodoList([...todoLists])
+        }
     }
 
     function addTodoList(title: string) {
@@ -113,6 +132,8 @@ export function App() {
 
                     return (
                         <TodoList
+                            changeTodolistTitle={changeTodolistTitle}
+                            changeTaskTitle={changeTaskTitle}
                             key={tl.id}
                             id={tl.id}
                             filter={tl.filter}

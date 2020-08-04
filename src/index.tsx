@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {TestApp} from "./TestApp";
 import {App} from "./App";
 import {Exam} from "./Exam/Exam"
+import TestApp from "./repeat/TestApp";
 
 ReactDOM.render(<App />,  document.getElementById('root'));
 

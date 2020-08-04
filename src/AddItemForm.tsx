@@ -1,4 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {TextField} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import {AddBox} from "@material-ui/icons";
 
 type AddItemFormProps = {
     addItem: (title: string, ) => void
@@ -31,14 +34,19 @@ export function AddItemForm(props: AddItemFormProps) {
 
     return (
         <div>
-            <input
+            <TextField
+                size={"small"}
+                variant={"outlined"}
+                label={"Title"}
                 value={taskName}
                 onChange={onTaskNameChange}
                 onKeyPress={onAddTaskKeyPressed}
-                className={error ? "error" : ""}
+                error={!!error}
+                helperText={error}
             />
-            <button onClick={addTask}>+</button>
-            {error && <div className="error-message">{error}</div>}
+            <IconButton color={"primary"} onClick={addTask}>
+            <AddBox/>
+            </IconButton>
         </div>
     )
 }

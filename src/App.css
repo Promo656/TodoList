@@ -1,7 +1,7 @@
+/*
 .App {
   padding: 30px;
   display: flex;
-  flex-direction: row;
 }
 
 .App > div {
@@ -13,13 +13,14 @@
 }
 
 .error-message {
-  color:red;
+  color: red;
 }
 
-.active {
-  border: 2px solid #2c62e3;
+.active-filter {
+  background-color: aquamarine;
 }
 
 .is-done {
-  opacity: 0.4;
+  opacity: 0.5;
 }
+*/

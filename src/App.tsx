@@ -134,8 +134,8 @@ export function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding: "20px"}}><AddItemForm addItem={addTodoList}/></Grid>
-                <Grid container spacing={5}>{
+                <Grid container justify={"center"} style={{padding: "20px"}}><AddItemForm addItem={addTodoList}/></Grid>
+                <Grid container justify={"center"} spacing={5}>{
                     todoLists.map(tl => {
                         let taskForTodoList = tasks[tl.id]
                         if (tl.filter === "active") {

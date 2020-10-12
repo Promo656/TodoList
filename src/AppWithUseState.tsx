@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {TaskType, Todolist} from './Todolist';
-import s from "./TestApp.module.scss"
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
@@ -9,16 +8,17 @@ import {Menu} from "@material-ui/icons";
 export type TodoListType = {
     id: string
     title: string
-    filter: FilterType
+    filter: FilterValuesType
 }
 
-export type FilterType = "all" | "active" | "completed"
+export type FilterValuesType = "all" | "active" | "completed"
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
-function TestApp() {
+function AppWithUseState() {
+
 
     let todoListId1 = v1()
     let todoListId2 = v1()
@@ -75,7 +75,7 @@ function TestApp() {
         setTasks({...tasksObj})
     }
 
-    function changeFilter(value: FilterType, todoListId: string) {
+    function changeFilter(value: FilterValuesType, todoListId: string) {
         let todoList = todoLists.find((tl) => tl.id === todoListId)
         if (todoList) {
             todoList.filter = value
@@ -125,7 +125,7 @@ function TestApp() {
                 </Toolbar>
             </AppBar>
             <Container>
-                <Grid container style={{padding:"10px 0"}}>
+                <Grid container style={{padding: "10px 0"}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={3}>
@@ -140,7 +140,7 @@ function TestApp() {
                             }
 
                             return <Grid item>
-                                <Paper elevation={4} style={{padding:"10px"}}>
+                                <Paper elevation={4} style={{padding: "10px"}}>
                                     <Todolist title={tl.title}
                                               id={tl.id}
                                               key={tl.id}
@@ -160,10 +160,8 @@ function TestApp() {
                     )}
                 </Grid>
             </Container>
-
-
         </div>
     )
 }
 
-export default TestApp;
+export default AppWithUseState;

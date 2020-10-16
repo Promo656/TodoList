@@ -6,7 +6,7 @@ import {Menu} from "@material-ui/icons";
 import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, removeTodolistAC} from "./Store/todoListsReducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./Store/taskReducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./Store/store";
+import {AppRootStateType} from "./Store/store";
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
@@ -24,8 +24,8 @@ function AppWithRedux() {
     console.log("AppWithRedux is rendering")
 
     const dispatch = useDispatch()
-    const todoLists = useSelector<AppRootState, Array<TodoListType>>((state) => state.todoLists)
-    const tasksObj = useSelector<AppRootState, TaskStateType>((state) => state.tasks)
+    const todoLists = useSelector<AppRootStateType, Array<TodoListType>>((state) => state.todoLists)
+    const tasksObj = useSelector<AppRootStateType, TaskStateType>((state) => state.tasks)
 
     const addTask = useCallback((title: string, todolistId: string) => {
         const action = addTaskAC(title, todolistId)
@@ -96,7 +96,6 @@ function AppWithRedux() {
                                     <Paper elevation={4} style={{padding: "10px"}}>
                                         <Todolist title={tl.title}
                                                   id={tl.id}
-
                                                   tasks={filteredTasks}
                                                   removeTask={removeTask}
                                                   changeFilter={changeFilter}

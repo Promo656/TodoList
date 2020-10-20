@@ -1,14 +1,15 @@
 import React from "react";
-import {AddItemForm} from "./AddItemForm";
+import {AddItemForm} from "../AddItemForm";
 import {action} from "@storybook/addon-actions";
 
 export default {
     title: "AddItemForm Component",
-    component:AddItemForm
+    component: AddItemForm
 }
 
-const callBack=action("Button + was pressed")
+const callBack = action("Button + was pressed")
 
-export const AddItemFormExample=()=>{
+export function AddItemFormExample () {
     return <AddItemForm addItem={callBack}/>
+
 }

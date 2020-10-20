@@ -1,6 +1,6 @@
 import React from "react";
 import {action} from "@storybook/addon-actions";
-import {EditableSpan} from "./EditableSpan";
+import {EditableSpan} from "../EditableSpan";
 
 export default {
     title: "EditableSpan Component",
@@ -9,6 +9,6 @@ export default {
 
 const changeCallBack=action("Change callback")
 
-export const EditableSpanExample=()=>{
+export function EditableSpanExample(){
     return <EditableSpan title={"Start title"} onChange={changeCallBack}/>
 }

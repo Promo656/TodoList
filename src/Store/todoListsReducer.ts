@@ -6,6 +6,7 @@ export type ActionType =
     | AddTodolistAT
     | ChangeTodolistTitleAT
     | ChangeTodolistFilterAT
+    | SetTodoListsTypeAT
 
 
 export const todoListId1 = v1()
@@ -37,6 +38,9 @@ export const todoListsReducer = (state: Array<TodoListType> = initialState, acti
                 todolist.filter = action.filter;
             }
             return [...state];
+        }
+        case "SET-TODOLIST":{
+            return action.todoLists
         }
         default:
             return state
@@ -76,4 +80,12 @@ export type ChangeTodolistFilterAT = {
 }
 export const changeTodolistFilterAC = (todoListId: string, filter: FilterValuesType): ChangeTodolistFilterAT => {
     return {type: 'CHANGE-TODOLIST-FILTER', id: todoListId, filter: filter}
+}
+//--------------------------------------SET-TODOLIST-----------------------------
+export type SetTodoListsTypeAT = {
+    type: "SET-TODOLIST"
+    todoLists: Array<TodoListType>
+}
+export const setTodoListsAC = (todoLists: Array<TodoListType>): SetTodoListsTypeAT => {
+    return {type: "SET-TODOLIST", todoLists: todoLists}
 }

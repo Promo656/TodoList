@@ -1,5 +1,5 @@
 module.exports = {
-    stories: ['../src/stories/**/*.stories.tsx'],
+    stories: ['../src/**/*.stories.tsx'],
     addons: [
         '@storybook/preset-create-react-app',
         '@storybook/addon-actions',
@@ -13,10 +13,11 @@ module.exports = {
                 loaderOptions: {
                     prettierConfig: {
                         printWidth: 80, singleQuote: false,
-                        // options: {parser: 'typescript'}
+                        options: {parser: 'typescript'}
                     },
                 },
             },
         }
     ],
 };
+

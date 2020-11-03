@@ -33,7 +33,7 @@ function AppWithReducers() {
 
     let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
         [todolistId1]: [
-            {id: v1(), title: "HTML&CSS", status: TaskStatuses.Completed, todoListId: todolistId1, description: '',
+            {id: v1(), title: "HTML&SCSS", status: TaskStatuses.Completed, todoListId: todolistId1, description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low},
             {id: v1(), title: "JS", status: TaskStatuses.Completed, todoListId: todolistId1, description: '',
                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low}
